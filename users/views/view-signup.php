@@ -4,61 +4,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Sign Up - Knowledge Hub</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            display: flex;
-            min-height: 100vh;
-            flex-direction: column;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
         }
 
-        main {
-            flex: 1 0 auto;
-        }
-
-        .container {
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
             margin-top: 50px;
-        }
-
-        .card {
-            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-            border-radius: 10px;
-            background-color: #fff;
-            border: 1px solid #e0e0e0;
-        }
-
-        .card-content {
             padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
         }
 
-        .card-title {
-            font-size: 24px;
-            font-weight: bold;
+        .form-container h2 {
+            font-weight: 700;
+            text-align: center;
             margin-bottom: 30px;
         }
 
-        .input-field {
-            position: relative;
+        .form-group label {
+            font-weight: 700;
         }
 
-        .input-field .helper-text {
-            position: absolute;
-            font-size: 0.8em;
-            color: red;
+        .form-group .form-control {
+            border-radius: 0;
+            border: none;
+            border-bottom: 1px solid #ced4da;
+            transition: border-color 0.3s ease-in-out;
         }
 
-        .btn {
-            background-color: #2196f3;
+        .form-group .form-control:focus {
+            border-color: #007bff;
+            box-shadow: none;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            font-weight: 700;
+            text-transform: uppercase;
             width: 100%;
             margin-top: 20px;
         }
 
-        .input-field input {
-            border-bottom: 1px solid #9e9e9e;
-            box-shadow: none;
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+
+        .error-message {
+            color: #f44336;
+            font-size: 0.8em;
+            margin-top: 5px;
         }
     </style>
 </head>
@@ -66,74 +72,56 @@
 <body>
     <?php include '../assets/header.php'; ?>
 
-    <main>
-        <div class="container">
-            <div class="row">
-                <div class="col s12 m8 offset-m2">
-                    <div class="card">
-                        <div class="card-content">
-                            <span class="card-title center-align">Sign Up</span>
-                            <form class="col s12" action="../controllers/controller-signup.php" method="post" novalidate>
-                                <br>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <input type="text" id="name" name="name" class="validate" required value="<?= isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '' ?>">
-                                        <label for="name">Name</label>
-                                        <span class="helper-text error" data-error="wrong">
-                                            <?php if (isset($errors['name'])) {
-                                                echo $errors['name'];
-                                            } ?>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <input type="email" id="email" name="email" required value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>">
-                                        <label for="email">Email</label>
-                                        <span class="helper-text error" data-error="wrong">
-                                            <?php if (isset($errors['email'])) {
-                                                echo $errors['email'];
-                                            } ?>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12 m6">
-                                        <input type="password" id="password" name="password" required>
-                                        <label for="password">Password</label>
-                                        <span class="helper-text error" data-error="wrong">
-                                            <?php if (isset($errors['password'])) {
-                                                echo $errors['password'];
-                                            } ?>
-                                        </span>
-                                    </div>
-                                    <div class="input-field col s12 m6">
-                                        <input type="password" id="passwordConfirm" name="passwordConfirm" required>
-                                        <label for="passwordConfirm">Confirm Password</label>
-                                        <span class="helper -text error" data-error="wrong">
-                                            <?php if (isset($errors['passwordConfirm'])) {
-                                                echo $errors['passwordConfirm'];
-                                            } ?>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row center-align">
-                                    <div class="input-field col s12">
-                                        <button type="submit" class="btn waves-effect waves-light">Sign Up</button>
-                                        <p>Already have an account? <a href="controller-signin.php">Log In</a></p>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+    <div class="container">
+        <div class="form-container mb-5">
+            <h2>Sign Up</h2>
+            <form action="../controllers/controller-signup.php" method="post" novalidate>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required value="<?= isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '' ?>">
+                    <div class="error-message">
+                        <?php if (isset($errors['name'])) {
+                            echo $errors['name'];
+                        } ?>
                     </div>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>">
+                    <div class="error-message">
+                        <?php if (isset($errors['email'])) {
+                            echo $errors['email'];
+                        } ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                    <div class="error-message">
+                        <?php if (isset($errors['password'])) {
+                            echo $errors['password'];
+                        } ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="passwordConfirm">Confirm Password</label>
+                    <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" required>
+                    <div class="error-message">
+                        <?php if (isset($errors['passwordConfirm'])) {
+                            echo $errors['passwordConfirm'];
+                        } ?>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+                <p class="text-center mt-3">Already have an account? <a href="controller-signin.php">Log In</a></p>
+            </form>
         </div>
-    </main>
+    </div>
+
     <?php include '../assets/footer.php'; ?>
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

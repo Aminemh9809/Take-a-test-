@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (password_verify($password, $storedHashedPassword) && $recaptcha == true) {
                 $_SESSION["user"] = $result;
                 unset($_SESSION["user"]["password"]);
-                header('Location: controller-test.php');
+                header('Location: controller-home.php');
                 exit();  // Ensure that no further code is executed after the redirection
 
             } else {

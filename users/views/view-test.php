@@ -32,7 +32,8 @@
                                     <span><?= $answer['answer']; ?></span>
                                 </label>
                             </p>
-                            <input type="hidden" name="hidden" value="<?php $answer['correct_answer'] ?>">
+                            <input type="hidden" name="hidden" value="<?= $answer['correct_answer'] ?>">
+                            
                         <?php endforeach; ?>
                     </div>
                     <div class="row">

@@ -13,8 +13,8 @@
         <div class="row">
             <div class="col s12">
                 <h2>Test Result</h2>
-                <p>You scored  questions correctly.</p>
-                <p>Your percentage score is:</p>
+                <p>You scored <span style="color:blue;"><?= $_SESSION['correct_question_count']?> </span>questions correctly.</p>
+                <p>Your percentage score is: <span style="color:blue;"> <?= $_SESSION['correct_question_count']* 10  ?>%</span> </p>
 
                 <!-- Display additional information or feedback based on the score -->
               

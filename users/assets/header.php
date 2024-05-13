@@ -6,10 +6,40 @@
   <!-- Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <!-- Google Icons -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <title>Test Website</title>
 </head>
 <body>
+<header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+            <img src="../assets/images/images.png" alt="Logo" style="width: 50px; height: 50px; margin-right:5px;">
+                <a class="navbar-brand" href="#">Knowledge Hub</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../controllers/controller-home.php">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../views/view-about.php">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../controllers/controller-test.php">Tests</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="users/controllers/controller-signup.php">Admin-Hub</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!--
   <nav class="navbar-fixed">
     <div class="nav-wrapper indigo darken-4">
       <a href="#" class="brand-logo center">
@@ -25,8 +55,9 @@
 </ul>
     </div>
   </nav>
-
+-->
   <!-- Your content goes here -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
   <!-- Materialize JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
