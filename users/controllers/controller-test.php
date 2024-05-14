@@ -21,16 +21,21 @@ if (isset($_SESSION['user'])) {
     $questions = Tests::questions($_SESSION['current_test_id']);
     //var_dump($questions);
     $current_question_index = 0;
-    $_SESSION['current_question_id'] = $questions[$current_question_index]['id_questions'];
+    
     // Check if the current question index is already set in the session
     if (!isset($_SESSION['current_question_index'])) {
+       // echo "if not isset";
         $_SESSION['current_question_index'] = $current_question_index;
-        $_SESSION['current_question_id'] = $questions[$current_question_index]['id_questions'];
+        
     }
-
+    $_SESSION['current_question_id'] = $questions[ $_SESSION['current_question_index']]['id_questions'];
     $current_question = $questions[$_SESSION['current_question_index']];
+    //var_dump($current_question);
+   // echo "current index ".$_SESSION['current_question_index']. " id : ". $_SESSION['current_question_id'];
+
     $answers  = Tests::answersNew($_SESSION['current_test_id'], $_SESSION['current_question_id']);
     //var_dump($answers);
+    //exit;
 
     // Initialize the user_answers array if it doesn't exist
     if (!isset($_SESSION['user_answers'])) {
@@ -72,6 +77,9 @@ if (isset($_SESSION['user'])) {
 
         };
         $_SESSION['current_question_index']++;
+     
+        $_SESSION['current_question_id'] = $questions[$_SESSION['current_question_index']]['id_questions'];
+        echo "current index ".$_SESSION['current_question_index']. " id : ". $_SESSION['current_question_id'];
     
 
         $_SESSION['user_answers_save'] = $_SESSION['user_answers'];
@@ -94,11 +102,12 @@ if (isset($_SESSION['user'])) {
 
 
                 $current_question = $questions[$_SESSION['current_question_index']];                
-                $_SESSION['current_question_id'] = $questions[$current_question_index]['id_questions'];
+                $_SESSION['current_question_id'] = $questions[$_SESSION['current_question_index']]['id_questions'];
                 $answers  = Tests::answersNew($_SESSION['current_test_id'],$_SESSION['current_question_id'] );
             }
         } else {
             $_SESSION['current_question_index'] = 0;
+            $_SESSION['current_question_id'] = $questions[$_SESSION['current_question_index']]['id_questions'];
             $_SESSION['user_answers']= array() ;
             // echo "stop";
             header("Location: controller-result.php");

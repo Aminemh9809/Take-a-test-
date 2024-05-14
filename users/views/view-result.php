@@ -7,9 +7,9 @@
 </head>
 <body>
     <!-- Header -->
-    <?php include '../assets/header.php'; ?>
+    <?php include '../../assets/header.php'; ?>
 
-    <div class="container">
+    <div class="container mt-5">
         <div class="row">
             <div class="col s12">
                 <h2>Test Result</h2>
@@ -17,7 +17,6 @@
                 <p>Your percentage score is: <span style="color:blue;"> <?= $_SESSION['correct_question_count']* 10  ?>%</span> </p>
 
                 <!-- Display additional information or feedback based on the score -->
-              
 
                 <!-- Add a button or link to retake the test or go back to the home page -->
                 <a href="../controllers/controller-home.php" class="btn">Back to Home</a>
