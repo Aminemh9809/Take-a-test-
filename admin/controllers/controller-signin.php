@@ -1,5 +1,5 @@
-<?php 
-include_once '../models/users.php';
+<?php
+require_once '../models/users.php';
 require_once '../../autoload.php';
 
 
@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gRecaptchaResponse = $_POST['g-recaptcha-response'];
     $resp = $recaptcha->setExpectedHostname('localhost')
         ->verify($gRecaptchaResponse, $remoteIp);
-        $recaptcha = false;
+    $recaptcha = false;
     if ($resp->isSuccess()) {
         $recaptcha = true;
     } else {
@@ -21,39 +21,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $recaptcha = false;
     }
 
-    $enterpriseEmail = $_POST["enterpriseEmail"];
+
+
+    $email = $_POST["email"];
 
     $password = $_POST["password"];
-    $result = Users::signIn($enterpriseEmail);
+    $result = Users::signIn($email);
 
-
-    if (empty($_POST["enterpriseEmail"])) {
-        $errors['enterpriseEmail'] = "required fields";
-    } else if (!filter_var($_POST["enterpriseEmail"], FILTER_VALIDATE_EMAIL)) {
-        $errors['enterpriseEmail'] = "The email address is invalid";
+    if (empty($_POST["email"])) {
+        $errors['email'] = "required fields";
+    } else if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+        $errors['email'] = "The email address is invalid";
     };
 
     if (empty($password)) {
         $errors['password'] = "required fields";
     };
+    if (!$recaptcha) {
+        $errors['recaptcha'] = "Recaptcha verification failed";
+    } else {
 
-    if($result == false){
-        $errors['enterpriseEmail'] = "Email invalid";
-        
-    }else{
-        $storedHashedPassword = $result['enterprise_password'];
-        if(password_verify($password, $storedHashedPassword) && $recaptcha = true){
-            $_SESSION["user"] = $result;
-            unset($_SESSION["user"]["user_password"]);
-            header('Location: controller-dashboard.php');
-            exit();  // Ensure that no further code is executed after the redirection
+        if ($result == false) {
+            $errors['email'] = "Email invalid";
+        } else {
+            // var_dump("ok");
+            $storedHashedPassword = $result['password'];
+            if (password_verify($password, $storedHashedPassword) && $recaptcha == true) {
+                $_SESSION["user"] = $result;
+                unset($_SESSION["user"]["password"]);
+                header('Location: controller-home.php');
+                exit();  // Ensure that no further code is executed after the redirection
 
-        }else {
-            $errors['password'] = "incorrect Password";
+            } else {
+                $errors['password'] = "incorrect Password";
+            }
         }
     }
-
 }
 include_once '../views/view-signin.php';
-
-?>

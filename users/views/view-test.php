@@ -11,7 +11,7 @@
 </head>
 <body>
     <!-- Header -->
-    <?php include '../assets/header.php'; ?>
+    <?php include '../../assets/header.php'; ?>
     <br><br>
     <div class="container">
         <div class="row">
@@ -28,7 +28,7 @@
                         <?php foreach ($answers as $answer) : ?>
                             <p>
                                 <label>
-                                    <input name="<?= $_SESSION['current_question_index'] ?>" type="radio" value="<?= $answer['id_answers']; ?>">
+                                    <input name="<?= $_SESSION['current_question_id'] ?>" type="radio" value="<?= $answer['id_answers']; ?>">
                                     <span><?= $answer['answer']; ?></span>
                                 </label>
                             </p>

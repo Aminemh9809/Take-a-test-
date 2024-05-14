@@ -4,128 +4,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>connection</title>
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Sign Up - Knowledge Hub</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        .input-field {
-            position: relative;
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
         }
 
-        .input-field .helper-text {
-            position: absolute;
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            margin-top: 50px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+        }
+
+        .form-container h2 {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            font-weight: 700;
+        }
+
+        .form-group .form-control {
+            border-radius: 0;
+            border: none;
+            border-bottom: 1px solid #ced4da;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        .form-group .form-control:focus {
+            border-color: #007bff;
+            box-shadow: none;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            font-weight: 700;
+            text-transform: uppercase;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+
+        .error-message {
+            color: #f44336;
             font-size: 0.8em;
-            /* Adjust the font size as needed */
-            color: red;
-            /* Adjust the color as needed */
+            margin-top: 5px;
         }
-
-        ;
     </style>
 </head>
 
 <body>
-    <!-- <?php include_once '../assets/header.php' ?> -->
-
+    <?php include '../assets/header.php'; ?>
 
     <div class="container">
-        <div class="row">
-            <form class="col s12" action="../controllers/controller-signup.php" method="post" novalidate>
-                <div class="input-field col s12 m6">
-                    <label for="enterpriseName">Enterprise Name:</label>
-                    <input type="text" id="enterpriseName" name="enterpriseName" class="validate" required value="<?= isset($_POST['enterpriseName']) ? htmlspecialchars($_POST['enterpriseName']) : '' ?>">
-                    <span class="helper-text error" data-error="wrong">
-                        <?php if (isset($errors['enterpriseName'])) {
-                            echo $errors['enterpriseName'];
+        <div class="form-container mb-5">
+            <h2>Sign Up</h2>
+            <form action="../controllers/controller-signup.php" method="post" novalidate>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required value="<?= isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '' ?>">
+                    <div class="error-message">
+                        <?php if (isset($errors['name'])) {
+                            echo $errors['name'];
                         } ?>
-                    </span>
+                    </div>
                 </div>
-
-                <div class="input-field col s12 m6 ">
-                    <label for="enterpriseEmail">Enterprise Email:</label>
-                    <input type="email" id="enterpriseEmail" name="enterpriseEmail" required value="<?= isset($_POST['enterpriseEmail']) ? htmlspecialchars($_POST['enterpriseEmail']) : '' ?>">
-                    <span class="helper-text error" data-error="wrong">
-                        <?php if (isset($errors['enterpriseEmail'])) {
-                            echo $errors['enterpriseEmail'];
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>">
+                    <div class="error-message">
+                        <?php if (isset($errors['email'])) {
+                            echo $errors['email'];
                         } ?>
-                    </span>
+                    </div>
                 </div>
-                <div class="input-field col s12 m6 ">
-
-                    <label for="enterpriseSiret">Enterprise SIRET:</label>
-                    <input type="text" id="enterpriseSiret" name="enterpriseSiret" required value="<?= isset($_POST['enterpriseSiret']) ? htmlspecialchars($_POST['enterpriseSiret']) : '' ?>">
-                    <span class="helper-text error" data-error="wrong">
-                        <?php if (isset($errors['enterpriseSiret'])) {
-                            echo $errors['enterpriseSiret'];
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                    <div class="error-message">
+                        <?php if (isset($errors['password'])) {
+                            echo $errors['password'];
                         } ?>
-                    </span>
+                    </div>
                 </div>
-                <div class="input-field col s12 m6">
-
-                    <label for="enterpriseAddress">Enterprise Address:</label>
-                    <input type="text" id="enterpriseAddress" name="enterpriseAddress" required value="<?= isset($_POST['enterpriseAddress']) ? htmlspecialchars($_POST['enterpriseAddress']) : '' ?>">
-                    <span class="helper-text error" data-error="wrong">
-                        <?php if (isset($errors['enterpriseAddress'])) {
-                            echo $errors['enterpriseAddress'];
+                <div class="form-group">
+                    <label for="passwordConfirm">Confirm Password</label>
+                    <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" required>
+                    <div class="error-message">
+                        <?php if (isset($errors['passwordConfirm'])) {
+                            echo $errors['passwordConfirm'];
                         } ?>
-                    </span>
+                    </div>
                 </div>
-
-                <div class="input-field col s12 m6">
-                    <label for="enterpriseZipcode">Enterprise Zip Code:</label>
-                    <input type="text" id="enterpriseZipcode" name="enterpriseZipcode" required value="<?= isset($_POST['enterpriseZipcode']) ? htmlspecialchars($_POST['enterpriseZipcode']) : '' ?>">
-                    <span class="helper-text error" data-error="wrong" data-success="right">
-                        <?php if (isset($errors['enterpriseZipcode'])) {
-                            echo $errors['enterpriseZipcode'];
-                        } ?>
-                    </span>
-                </div>
-
-                <div class="input-field col s12 m6">
-
-                    <label for="enterpriseCity">Enterprise City:</label>
-                    <input type="text" id="enterpriseCity" name="enterpriseCity" required value="<?= isset($_POST['enterpriseCity']) ? htmlspecialchars($_POST['enterpriseCity']) : '' ?>">
-                    <span class="helper-text error" data-error="wrong">
-                        <?php if (isset($errors['enterpriseCity'])) {
-                            echo $errors['enterpriseCity'];
-                        } ?>
-                    </span>
-                </div>
-                <div class="input-field col s12 m12">
-
-                    <label for="enterprisePassword">Enterprise Password:</label>
-                    <input type="password" id="enterprisePassword" name="enterprisePassword" required>
-                    <span class="helper-text error" data-error="wrong">
-                        <?php if (isset($errors['enterprisePassword'])) {
-                            echo $errors['enterprisePassword'];
-                        } ?>
-                    </span>
-                </div>
-                <div class="input-field col s12 m12">
-
-                    <label for="enterprisePasswordconfirm">Confirm Password:</label>
-                    <input type="password" id="enterprisePasswordconfirm" name="enterprisePasswordconfirm" required>
-                    <span class="helper-text error" data-error="wrong">
-                        <?php if (isset($errors['enterprisePasswordconfirm'])) {
-                            echo $errors['enterprisePasswordconfirm'];
-                        } ?>
-                    </span>
-                </div>
-                <div class="input-field col s12 m12">
-                    <button type="submit" class="btn waves-effect waves-light green">Submit</button>
-                </div>
-
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+                <p class="text-center mt-3">Already have an account? <a href="controller-signin.php">Log In</a></p>
             </form>
         </div>
     </div>
 
+    <?php include '../assets/footer.php'; ?>
 
-
-
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

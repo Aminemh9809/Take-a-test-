@@ -30,7 +30,7 @@
 <body>
     <!-- Navigation Bar -->
 
-    <?php include '../assets/header.php'; ?>
+    <?php include '../../assets/header.php'; ?>
 
     <!-- Main Content -->
     <div class="container my-5">
@@ -52,7 +52,7 @@
     </div>
 
     <!-- Footer -->
-    <?php include '../assets/footer.php'; ?>
+    <?php include '../../assets/footer.php'; ?>
 
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -6,35 +6,41 @@ session_start();
 if (isset($_SESSION['user'])) {
     if (isset($_GET['test_id'])){
         $test_id = $_GET['test_id'];
+        if($test_id > 1 ){
+        }
         $_SESSION['current_question_index'] = 0;
         if (!isset($_SESSION['current_test_id']) || $_SESSION['current_test_id'] !== $test_id) {
             // Reset current_question_index and user_answers for a new test
             $_SESSION['user_answers'] = array();
             $_SESSION['current_test_id'] = $test_id; // Store the current test_id
-            
+
         }
-    
+
     };
     
     $questions = Tests::questions($_SESSION['current_test_id']);
+    //var_dump($questions);
     $current_question_index = 0;
+    $_SESSION['current_question_id'] = $questions[$current_question_index]['id_questions'];
     // Check if the current question index is already set in the session
     if (!isset($_SESSION['current_question_index'])) {
         $_SESSION['current_question_index'] = $current_question_index;
+        $_SESSION['current_question_id'] = $questions[$current_question_index]['id_questions'];
     }
 
     $current_question = $questions[$_SESSION['current_question_index']];
-    $answers  = Tests::answersNew($_SESSION['current_test_id'],$_SESSION['current_question_index'] + 1);
-    var_dump($answers);
+    $answers  = Tests::answersNew($_SESSION['current_test_id'], $_SESSION['current_question_id']);
+    //var_dump($answers);
 
     // Initialize the user_answers array if it doesn't exist
     if (!isset($_SESSION['user_answers'])) {
         $_SESSION['user_answers'] = array(
-
         );
     }
 
-    $selected_answer = isset($_POST[$_SESSION['current_question_index']]) ? $_POST[$_SESSION['current_question_index']] : null;
+    $selected_answer = isset($_POST[$_SESSION['current_question_id']]) ? $_POST[$_SESSION['current_question_id']] : null;
+     
+    //echo " anw ".$selected_answer;
     $correct_answer = isset($_POST['hidden']) ? $_POST['hidden'] : null;
 
     // var_dump($selected_answer);
@@ -82,8 +88,14 @@ if (isset($_SESSION['user'])) {
                 //exit;
                 //}
 
-                $current_question = $questions[$_SESSION['current_question_index']];
-                $answers  = Tests::answersNew($_SESSION['current_test_id'],$_SESSION['current_question_index'] + 1);
+                // $current_question = $questions[$_SESSION['current_question_index']];
+               // $answers  = Tests::answers($_SESSION['current_question_index'] + 1);
+
+
+
+                $current_question = $questions[$_SESSION['current_question_index']];                
+                $_SESSION['current_question_id'] = $questions[$current_question_index]['id_questions'];
+                $answers  = Tests::answersNew($_SESSION['current_test_id'],$_SESSION['current_question_id'] );
             }
         } else {
             $_SESSION['current_question_index'] = 0;
