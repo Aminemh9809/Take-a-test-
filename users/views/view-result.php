@@ -20,8 +20,7 @@
               
 
                 <!-- Add a button or link to retake the test or go back to the home page -->
-                <a href="test.php" class="btn">Retake Test</a>
-                <a href="index.php" class="btn">Back to Home</a>
+                <a href="../controllers/controller-home.php" class="btn">Back to Home</a>
             </div>
         </div>
     </div>
