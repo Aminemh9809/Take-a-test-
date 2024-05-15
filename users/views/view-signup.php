@@ -70,7 +70,7 @@
 </head>
 
 <body>
-    <?php include '../assets/header.php'; ?>
+    <?php include '../../assets/header.php'; ?>
 
     <div class="container">
         <div class="form-container mb-5">
@@ -118,7 +118,7 @@
         </div>
     </div>
 
-    <?php include '../assets/footer.php'; ?>
+    <?php include '../../assets/footer.php'; ?>
 
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

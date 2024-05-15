@@ -6,16 +6,12 @@ session_start();
 if (isset($_SESSION['user'])) {
     if (isset($_GET['test_id'])){
         $test_id = $_GET['test_id'];
-        if($test_id > 1 ){
-        }
         $_SESSION['current_question_index'] = 0;
         if (!isset($_SESSION['current_test_id']) || $_SESSION['current_test_id'] !== $test_id) {
             // Reset current_question_index and user_answers for a new test
-            $_SESSION['user_answers'] = array();
+            // $_SESSION['user_answers'] = array();
             $_SESSION['current_test_id'] = $test_id; // Store the current test_id
-
         }
-
     };
     
     $questions = Tests::questions($_SESSION['current_test_id']);

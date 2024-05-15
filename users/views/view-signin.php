@@ -33,7 +33,7 @@
 
 <body>
     <main>
-        <?php include '../assets/header.php'; ?>
+        <?php include '../../assets/header.php'; ?>
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6">
@@ -91,7 +91,7 @@
             </div>
         </div>
     </main>
-    <?php include '../assets/footer.php'; ?>
+    <?php include '../../assets/footer.php'; ?>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>

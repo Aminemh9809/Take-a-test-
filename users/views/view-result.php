@@ -23,6 +23,7 @@
             </div>
         </div>
     </div>
+    <?php include '../../assets/footer.php'; ?>
 
     <!-- Include your JavaScript files here -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

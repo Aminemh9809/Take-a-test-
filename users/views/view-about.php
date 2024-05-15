@@ -17,14 +17,14 @@
 </head>
 <body>
     <!-- Navigation Bar -->
-    <?php include '../assets/header.php'; ?>
+    <?php include '../../assets/header.php'; ?>
 
     <!-- Main Content -->
     <div class="container my-5">
         <h1 class="text-center mb-4">About Knowledge Hub</h1>
         <div class="row">
             <div class="col-md-6">
-                <img src="../assets/images/home_knowledge.jpg" class="img-fluid rounded mb-4" alt="About Knowledge Hub">
+                <img src="http://localhost:5000/projetstage/projetphp/assets/images/home_knowledge.jpg" class="img-fluid rounded mb-4" alt="About Knowledge Hub">
             </div>
             <div class="col-md-6">
                 <h2>Our Mission</h2>
@@ -38,7 +38,7 @@
     </div>
 
     <!-- Footer -->
-    <?php include '../assets/footer.php'; ?>
+    <?php include '../../assets/footer.php'; ?>
 
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
