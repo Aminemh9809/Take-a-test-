@@ -4,194 +4,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <!-- Materialize CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-     <!-- cdn chartsjs -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-
-
+    <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
     <style>
-        /* Custom styles */
-        .side-nav {
-            background-color: #3949ab;
+        .sidebar {
+            height: 100vh;
+            background-color: #343a40;
+            color: #fff;
         }
 
-        .side-nav a {
-            color: #fff !important;
+        .sidebar-nav {
+            list-style-type: none;
+            padding-left: 0;
         }
 
-        .content {
-            padding: 20px;
+        .sidebar-nav li {
+            margin-bottom: 10px;
         }
 
-        @media (min-width: 992px) {
-            .sideNav {
-                height: 100vh;
-                /* Set height to 100% of the viewport height */
-            }
+        .sidebar-nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .sidebar-nav a:hover {
+            color: #ccc;
         }
     </style>
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav class="">
-        <div class="nav-wrapper teal lighten-2">
-            <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
-            <a href="#" class="brand-logo m-5">Dashboard</a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="#!"><i class="fas fa-bell"></i></a></li>
-                <li>
-                    <!-- Dropdown Trigger -->
-                    <a class="dropdown-trigger" href="#!" data-target="dropdown1">
-                        <i class="material-icons">account_circle</i><i class="material-icons right">arrow_drop_down</i>
-                    </a>
-                    <!-- Dropdown Structure -->
-                    <ul id="dropdown1" class="dropdown-content">
-                        <li><a href="../controllers/controller-deconnection.php">Déconnection</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 sidebar">
+                <h4 class="mt-4 mb-4">Admin Dashboard</h4>
+                <ul class="sidebar-nav">
+                    <li><a href="">Tests</a></li>
+                    <li><a href="../controllers/controller-allUsers.php">Users</a></li>
+                    <li><a href="../controllers/controller-deconnection.php">Logout</a></li>
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <div class="my-4">
+                    <h2>Tests</h2>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#addTestModal">Add Test</button>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Test Name</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-    <!-- Page Layout -->
-    <div class="row">
-        <!-- Side Navigation -->
-        <div class="sideNav col s12 m4 l3 purple darken-4">
-            <!-- Grey navigation panel -->
-            <ul class="collection with-header purple darken-4" style="border: none;">
-                <li class="collection-header purple darken-4 white-text" style="border: none;">
-                    <h4>User Info</h4>
-                </li>
-                <li class="collection-item purple darken-4 white-text" style="border: none;">Entreprise nom : <?= $enterprise['enterprise_name'] ?></li>
-                <li class="collection-item purple darken-4 white-text" style="border: none;">Entreprise address : <?= $enterprise['enterprise_adress'] ?></li>
-                <li class="collection-item purple darken-4 white-text" style="border: none;"><?= $enterprise['enterprise_email'] ?></li>
-                <li class="collection-item purple darken-4 white-text" style="border: none;">Siret : <?= $enterprise['enterprise_siret'] ?></li>
-                <!-- Add more items as needed -->
-            </ul>
-        </div>
 
-        <!-- Page Content -->
-        <div class="col s12 m8 l9">
-            <div class="content">
-                <!-- Cards Section -->
-                <div class="row">
-                    <!-- Carte 1 -->
-                    <div class="col s12 m4">
-                        <div class="card blue darken-1">
-                            <div class="card-content white-text">
-                                <span class="card-title">Total des utilisateurs</span>
-                                <p>nombre d'utilisateurs : <?= $userCount ?></p>
+
+
+                            <?php foreach ($tests as $test) : ?>
+                                <tr>
+                                    <td>
+                                        <span class="test-name"><?= $test['name'] ?></span>
+                                        <input type="text" class="form-control edit-test-name d-none" value="<?= $test['name'] ?>">
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm edit-btn">Edit</button>
+                                        <form method="post" action="../controllers/controller-dashboard.php" onsubmit="return confirm('Are you sure you want to delete this test?');" style="display: inline-block;">
+                                            <input type="hidden" name="test_id" value="<?= $test['id_tests'] ?>">
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+
+                            <!-- Delete Modal -->
+                            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel">Delete Test</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete this test?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <!-- The "Confirm Delete" button is now removed -->
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-action">
-                                <a href="#">Voir plus</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Carte 2 -->
-                    <div class="col s12 m4">
-                        <div class="card deep-purple darken-1">
-                            <div class="card-content white-text">
-                                <span class="card-title">Total des utilisateurs actifs</span>
-                                <p>Aperçu des utilisateurs actifs: <?= $userActive ?></p>
-                            </div>
-                            <div class="card-action">
-                                <a href="#">Détails</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Carte 3 -->
-                    <div class="col s12 m4">
-                        <div class="card purple darken-1">
-                            <div class="card-content white-text">
-                                <span class="card-title">Total des trajets</span>
-                                <p>Aperçu du total des trajets... <?= $rideCount ?></p>
-                            </div>
-                            <div class="card-action">
-                                <a href="#">Détails</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Carte 4 -->
-                    <div class="col s12 m4">
-                        <div class="card deep-purple darken-1">
-                            <div class="card-content white-text">
-                                <span class="card-title">Les 5 derniers utilisateurs </span>
-                                <p>Les 5 derniers utilisateurs </p>
-                            </div>
-                            <div class="card-action">
-                                <a href="../controllers/controller-fiveUsers.php">Détails</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Carte 5 -->
-                    <div class="col s12 m4">
-                        <div class="card deep-purple darken-1">
-                            <div class="card-content white-text">
-                                <span class="card-title">Zone F : Stats des Moyens de transport (à venir)</span>
-                                <canvas id="transportChart"></canvas>
-                            </div>
-                            <div class="card-action">
-                                <a href="#">Détails</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Carte 6 -->
-                    <div class="col s12 m4">
-                        <div class="card deep-purple darken-1">
-                            <div class="card-content white-text">
-                                <span class="card-title">Tous les utilisateurs qui existe dans l'entreprise : </span>
-                            </div>
-                            <div class="card-action">
-                            <a href="../controllers/controller-allUsers.php">Détails</a>
-                            </div>
-                        </div>
-                    </div>
+
+
+
+
+
+
+
+                        </tbody>
+                    </table>
+
+                    <!-- Delete Modal -->
+
+
+
+
+                    </table>
+                </div>
+
+                <div class="my-4">
+                    <h2>Questions</h2>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#addQuestionModal">Add Question</button>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Question</th>
+                                <th>Test</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>What is the capital of France?</td>
+                                <td>Test 1</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                            <!-- Add more question rows here -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Add Test Modal -->
+    <div class="modal fade" id="addTestModal" tabindex="-1" role="dialog" aria-labelledby="addTestModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTestModalLabel">Add Test</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="../controllers/controller-dashboard.php">
+                        <div class="form-group">
+                            <label for="testName">Test Name</label>
+                            <input type="text" class="form-control" id="testName" placeholder="Enter test name">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Add Test</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-    <!-- JavaScript for Materialize CSS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Add Question Modal -->
+    <div class="modal fade" id="addQuestionModal" tabindex="-1" role="dialog" aria-labelledby="addQuestionModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addQuestionModalLabel">Add Question</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="testSelect">Test</label>
+                            <select class="form-control" id="testSelect">
+                                <option value="" disabled>Select Test</option>
+                                <option value="1">Test 1</option>
+                                <option value="2">Test 2</option>
+                                <!-- Add more test options here -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="questionText">Question</label>
+                            <textarea class="form-control" id="questionText" rows="3" placeholder="Enter question text"></textarea>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Add Question</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
-        var transportLabels = <?= json_encode(array_column($transportStats, 'transport_type')) ?>;
-        var transportData = <?= json_encode(array_column($transportStats, 'count')) ?>;
+        $(document).ready(function() {
+            // Edit button click event
+            $('.edit-btn').click(function() {
+                $(this).closest('tr').find('.test-name').addClass('d-none');
+                $(this).closest('tr').find('.edit-test-name').removeClass('d-none');
+                $(this).text('Save');
+                $(this).removeClass('btn-primary').addClass('btn-success');
+            });
 
-        var ctx = document.getElementById('transportChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: transportLabels,
-                datasets: [{
-                    data: transportData,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.7)', // Couleur pour le premier élément
-                        'rgba(54, 162, 235, 0.7)', // Couleur pour le deuxième élément
-                        'rgba(255, 206, 86, 0.7)', // Couleur pour le troisième élément
-                        'rgba(75, 192, 192, 0.7)', // Couleur pour le quatrième élément
-                        'rgba(153, 102, 255, 0.7)' // Couleur pour le cinquième élément
+            // Save button click event
+            $('.btn-success').click(function() {
+                var newTestName = $(this).closest('tr').find('.edit-test-name').val();
+                $(this).closest('tr').find('.test-name').text(newTestName);
+                $(this).closest('tr').find('.test-name').removeClass('d-none');
+                $(this).closest('tr').find('.edit-test-name').addClass('d-none');
+                $(this).text('Edit');
+                $(this).removeClass('btn-success').addClass('btn-primary');
+            });
 
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)', // Couleur pour le premier élément
-                        'rgba(54, 162, 235, 1)', // Couleur pour le deuxième élément
-                        'rgba(255, 206, 86, 1)', // Couleur pour le troisième élément
-                        'rgba(75, 192, 192, 1)', // Couleur pour le quatrième élément
-                        'rgba(153, 102, 255, 1)' // Couleur pour le cinquième élément
-                    ],
-                    borderWidth: 1
-                }]
-            },
+            // Delete button click event
+            $('#deleteModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var testId = button.data('test-id');
+                var modal = $(this);
+                modal.find('.confirm-delete').data('test-id', testId);
+            });
+
+            // Confirm delete button click event
+            $('.confirm-delete').click(function() {
+                var testId = $(this).data('test-id');
+                // Perform the delete operation using AJAX or redirect to a PHP file
+                console.log('Test with ID ' + testId + ' will be deleted.');
+                $('#deleteModal').modal('hide');
+            });
         });
     </script>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

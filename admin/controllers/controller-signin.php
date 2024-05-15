@@ -22,12 +22,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
 
-
     $email = $_POST["email"];
 
     $password = $_POST["password"];
     $result = Admin::signIn($email);
-    var_dump($result);
     if (empty($_POST["email"])) {
         $errors['email'] = "required fields";
     } else if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
@@ -47,9 +45,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // var_dump("ok");
             $storedHashedPassword = $result['password'];
             if ($password == $storedHashedPassword && $recaptcha == true) {
-                $_SESSION["user"] = $result;
-                unset($_SESSION["admin"]["admin"]);
-                echo " hello there ";
+                $_SESSION["admin"] = $result;
+                unset($_SESSION["admin"]["password"]);
+                header("Location: controller-dashboard.php");
                 exit();  // Ensure that no further code is executed after the redirection
 
             } else {

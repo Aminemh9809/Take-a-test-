@@ -4,7 +4,7 @@ require_once '../config/config.php';
 class Admin
 {
 
-    public static function signIn(string $test_id){
+    public static function signIn(string $email){
 
         try {
             // Les informations de connexion à la base de données
@@ -23,9 +23,9 @@ class Admin
             $query = $db->prepare($sql);
 
             // Liaison des valeurs avec les paramètres de la requête
-            $query->bindValue(':email', $test_id,PDO::PARAM_STR);
+            $query->bindValue(':email', $email,PDO::PARAM_STR);
             $query->execute();
-            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            $result = $query->fetch(PDO::FETCH_ASSOC);
             return $result;
             
             // Exécution de la requête
