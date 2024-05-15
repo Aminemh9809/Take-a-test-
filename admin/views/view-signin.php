@@ -33,7 +33,7 @@
 
 <body>
     <main>
-    <?php include '../../users/assets/header.php'; ?>
+    <?php include '../assets/header.php'; ?>
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6">
@@ -74,24 +74,16 @@
                                     <div class="g-recaptcha" data-sitekey="6LewEHEpAAAAALwpZiVDLJgsLnHVN06QoUYnaQ6n"></div>
                                         <span class="helper-text error"><?php echo isset($errors['recaptcha']) ? $errors['recaptcha'] : ''; ?></span>
                                 </div>
-                                
                                 <button type="submit" class="btn btn-primary btn-block">Login</button>
                             </form>
-                            <div class="row mt-3">
-                                <div class="col-6">
-                                    <p><a href="../controllers/controller-signup.php">Register Now!</a></p>
-                                </div>
-                                <div class="col-6 text-right">
-                                    <p><a href="#">Forgot password?</a></p>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-    <?php include '../../users/assets/footer.php'; ?>
+    <?php include '../../assets/footer.php'; ?>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>

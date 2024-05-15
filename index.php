@@ -90,7 +90,7 @@
                     <img src="https://source.unsplash.com/600x400/?growth" class="card-img-top" alt="Growth">
                     <div class="card-body">
                         <h5 class="card-title">Continuous Growth</h5>
-                        <p class="card-text">Embark on a journey of lifelong learning and stay ahead of the curve in your field.</p>
+                        <p class="card-text">Embark on a journey of lifelong learning and stay ahead of the curve in your field with our comprehensive tests .</p>
                     </div>
                 </div>
             </div>

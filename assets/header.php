@@ -22,9 +22,16 @@
             max-width: 100%;
         }
 
+        nav .brand-logo:hover {
+            text-decoration: none;
+        }
+
         @media (max-width: 600px) {
             nav .brand-logo {
                 font-size: 1.2rem;
+            }
+            nav .brand-logo img {
+                height: 35px; /* Adjust the height as desired */
             }
         }
     </style>
@@ -35,7 +42,7 @@
     <header>
         <nav class="navbar-dark bg-dark">
             <div class="nav-wrapper container">
-                <a href="../../index.php" class="brand-logo">
+                <a href="<?= $urlProject ?>/index.php" class="brand-logo">
                     <img src="<?= $urlProject ?>/assets/images/images.png" alt="Logo" class="responsive-img">
                     Knowledge Hub
                 </a>
@@ -43,7 +50,7 @@
                 <ul class="right hide-on-med-and-down">
                     <li><a href="<?= $urlProject ?>/users/controllers/controller-home.php">Home</a></li>
                     <li><a href="<?= $urlProject ?>/users/views/view-about.php">About</a></li>
-                    <li><a href="<?= $urlProject ?>/users/controllers/controller-test.php">Tests</a></li>
+                    <li><a href="<?= $urlProject ?>/users/controllers/controller-historique.php">Historique</a></li>
                     <li><a href="<?= $urlProject ?>/admin/controllers/controller-signin.php">Admin-Hub</a></li>
                 </ul>
             </div>
@@ -53,7 +60,7 @@
     <ul class="sidenav" id="mobile-nav">
         <li><a href="<?= $urlProject ?>/users/controllers/controller-home.php">Home</a></li>
         <li><a href="<?= $urlProject ?>/users/views/view-about.php">About</a></li>
-        <li><a href="<?= $urlProject ?>/users/controllers/controller-test.php">Tests</a></li>
+        <li><a href="<?= $urlProject ?>/users/controllers/controller-historique.php">Historique</a></li>
         <li><a href="<?= $urlProject ?>/admin/controllers/controller-signin.php">Admin-Hub</a></li>
     </ul>
 
