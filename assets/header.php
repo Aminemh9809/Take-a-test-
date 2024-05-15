@@ -50,7 +50,7 @@
                 <ul class="right hide-on-med-and-down">
                     <li><a href="<?= $urlProject ?>/users/controllers/controller-home.php">Home</a></li>
                     <li><a href="<?= $urlProject ?>/users/views/view-about.php">About</a></li>
-                    <li><a href="<?= $urlProject ?>/users/controllers/controller-historique.php">Historique</a></li>
+                    <li><a href="<?= $urlProject ?>/users/controllers/controller-history.php">History</a></li>
                     <li><a href="<?= $urlProject ?>/admin/controllers/controller-signin.php">Admin-Hub</a></li>
                 </ul>
             </div>
@@ -60,7 +60,7 @@
     <ul class="sidenav" id="mobile-nav">
         <li><a href="<?= $urlProject ?>/users/controllers/controller-home.php">Home</a></li>
         <li><a href="<?= $urlProject ?>/users/views/view-about.php">About</a></li>
-        <li><a href="<?= $urlProject ?>/users/controllers/controller-historique.php">Historique</a></li>
+        <li><a href="<?= $urlProject ?>/users/controllers/controller-history.php">History</a></li>
         <li><a href="<?= $urlProject ?>/admin/controllers/controller-signin.php">Admin-Hub</a></li>
     </ul>
 

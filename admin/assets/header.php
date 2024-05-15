@@ -28,9 +28,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="../views/view-about.php">About</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../controllers/controller-test.php">Tests</a>
-                        </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link" href="../../admin/controllers/controller-signin.php">Admin-Hub</a>
                         </li>

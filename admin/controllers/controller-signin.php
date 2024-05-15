@@ -1,5 +1,5 @@
 <?php
-require_once '../models/users.php';
+require_once '../models/admin.php';
 require_once '../../autoload.php';
 
 
@@ -26,8 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
 
     $password = $_POST["password"];
-    $result = Users::signIn($email);
-
+    $result = Admin::signIn($email);
+    var_dump($result);
     if (empty($_POST["email"])) {
         $errors['email'] = "required fields";
     } else if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
@@ -46,10 +46,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             // var_dump("ok");
             $storedHashedPassword = $result['password'];
-            if (password_verify($password, $storedHashedPassword) && $recaptcha == true) {
+            if ($password == $storedHashedPassword && $recaptcha == true) {
                 $_SESSION["user"] = $result;
-                unset($_SESSION["user"]["password"]);
-                header('Location: controller-home.php');
+                unset($_SESSION["admin"]["admin"]);
+                echo " hello there ";
                 exit();  // Ensure that no further code is executed after the redirection
 
             } else {
