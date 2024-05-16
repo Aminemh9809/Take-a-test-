@@ -11,6 +11,7 @@
             $testId = $_POST['test_id'];
             var_dump($testId);
             $testsDelete = tests::testsDelete($testId);
+            // $testsEdit = tests::testsEdit($testId);
             header('Location: controller-dashboard.php');
 
         }
