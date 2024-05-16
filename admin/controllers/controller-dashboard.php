@@ -6,16 +6,27 @@
         $tests = tests::testsShow();
 
 
-
-        if (isset($_POST['test_id'])) {
+        var_dump($_request);
+       
+        if (isset($_POST['delete']) && $_POST['test_id']) {
             $testId = $_POST['test_id'];
             var_dump($testId);
-            $testsDelete = tests::testsDelete($testId);
+            echo "delete";
+            exit;
+           // $testsDelete = tests::testsDelete($testId);
             // $testsEdit = tests::testsEdit($testId);
             header('Location: controller-dashboard.php');
 
         }
-    } else {
+        else 
+        if (isset($_POST['save']) && $_POST['test_id']){
+             echo "save";
+             exit;
+
+            
+        } 
+        }
+    else {
         header('Location: controller-signin.php');
     }
 

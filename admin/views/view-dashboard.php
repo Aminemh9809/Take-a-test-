@@ -33,6 +33,35 @@
             color: #ccc;
         }
     </style>
+    <script>
+        function editTest(id){
+           // alert('edit'+id);
+            document.getElementById("span"+id).classList.add('d-none');              
+            document.getElementById("text"+id ).classList.remove('d-none');
+            document.getElementById("edit"+id).classList.add('d-none');              
+            document.getElementById("save"+id ).classList.remove('d-none');
+        }
+        function saveTest(id){
+            //alert('save'+id);
+            document.getElementById("span"+id).classList.remove('d-none');              
+            document.getElementById("text"+id ).classList.add('d-none');
+            document.getElementById("edit"+id).classList.remove('d-none');              
+            document.getElementById("save"+id ).classList.add('d-none');
+            document.getElementById("span"+id).innerHTML = document.getElementById("text"+id ).value;     
+             document.forms["form1"].submit();
+           
+            
+        }
+        function deleteTest(id){
+            alert('delete');
+            var result = confirm("Are you sure you want to delete this test");
+                if (result) {
+                    document.forms["form1"].submit();
+                }
+            //Are you sure you want to delete this test
+            //action="../controllers/controller-dashboard.php"
+        }
+    </script>
 </head>
 
 <body>
@@ -60,24 +89,26 @@
                         <tbody>
 
 
-
+                     <form method="POST" name="form1">
 
                             <?php foreach ($tests as $test) : ?>
                                 <tr>
                                     <td>
-                                        <span class="test-name"><?= $test['name'] ?></span>
-                                        <input type="text" class="form-control edit-test-name d-none" value="<?= $test['name'] ?>">
+                                        <span class="test-name" id="span<?= $test['id_tests'] ?>" ><?= $test['name'] ?></span>
+                                        <input type="text" id="text<?= $test['id_tests'] ?>" class="form-control edit-test-name d-none" value="<?= $test['name'] ?>">
+                                        
+                                         
                                     </td>
                                     <td>
-                                        <button class="btn btn-primary btn-sm edit-btn">Edit</button>
-                                        <form method="post" action="../controllers/controller-dashboard.php" onsubmit="return confirm('Are you sure you want to delete this test?');" style="display: inline-block;">
-                                            <input type="hidden" name="test_id" value="<?= $test['id_tests'] ?>">
-                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                        </form>
+                                        <button type="button" id="edit<?= $test['id_tests'] ?>" class="btn btn-primary btn-sm edit-btn" onclick="editTest(<?= $test['id_tests'] ?>)">Edit</button>
+                                        <input type="button" name="save"  id="save<?= $test['id_tests'] ?>" class="btn btn-primary btn-sm edit-btn d-none" onclick="saveTest(<?= $test['id_tests'] ?>)" value="Save"> 
+                                        <input type="hidden" name="test_id" value="<?= $test['id_tests'] ?>">
+                                        <input type="button" name="delete" class="btn btn-danger btn-sm" value="Delete"onclick="deleteTest(<?= $test['id_tests'] ?>)" >  
+                                        
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
-
+                        </form>
                             <!-- Delete Modal -->
                             <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
