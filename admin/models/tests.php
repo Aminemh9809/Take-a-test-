@@ -164,4 +164,34 @@ class Tests
             die();
         }
     }
+    public static function testsEdit($test_id, $name)
+    { 
+        try {
+            // Les informations de connexion à la base de données
+
+            // Création de l'objet PDO pour la connexion à la base de données
+            $db = new PDO("mysql:host=localhost;dbname=" . DB_NAME, DB_USER, DB_PASS);
+            // Paramétrage des erreurs PDO pour les afficher en cas de problème
+           
+            // Requête SQL d'insertion des données dans la table userprofil
+            $sql = "update   tests set name= :name where id_tests = :id_tests";
+
+            // Préparation de la requête
+            $query = $db->prepare($sql);
+  
+              // Liaison des valeurs avec les paramètres de la requête
+              $query->bindValue(':name', htmlspecialchars($name), PDO::PARAM_STR);
+              $query->bindValue(':id_tests', $test_id, PDO::PARAM_STR);
+               
+              
+              // Exécution de la requête
+              $query->execute();
+            
+            // Exécution de la requête
+        } catch (PDOException $e) {
+            // En cas d'erreur, affichage du message d'erreur et arrêt du script
+            echo "Erreur update: " . $e->getMessage();
+            die();
+        }
+    }
 }

@@ -6,12 +6,16 @@ session_start();
 if (isset($_SESSION['user'])) {
     if (isset($_GET['test_id'])){
         $test_id = $_GET['test_id'];
+        if($test_id > 1 ){
+        }
         $_SESSION['current_question_index'] = 0;
         if (!isset($_SESSION['current_test_id']) || $_SESSION['current_test_id'] !== $test_id) {
             // Reset current_question_index and user_answers for a new test
-            // $_SESSION['user_answers'] = array();
+            $_SESSION['user_answers'] = array();
             $_SESSION['current_test_id'] = $test_id; // Store the current test_id
+
         }
+
     };
     
     $questions = Tests::questions($_SESSION['current_test_id']);
@@ -75,25 +79,14 @@ if (isset($_SESSION['user'])) {
         $_SESSION['current_question_index']++;
      
         $_SESSION['current_question_id'] = $questions[$_SESSION['current_question_index']]['id_questions'];
-        echo "current index ".$_SESSION['current_question_index']. " id : ". $_SESSION['current_question_id'];
+        // echo "current index ".$_SESSION['current_question_index']. " id : ". $_SESSION['current_question_id'];
     
 
         $_SESSION['user_answers_save'] = $_SESSION['user_answers'];
         // var_dump($_SESSION['user_answers_save']);
         if ($_SESSION['current_question_index'] < count($questions)) {
             if (isset($_POST["next"])) {
-                //if ($_SESSION['current_question_index'] >= count($questions)) {
-                // All questions have been answered, handle the submission or move to the next step
-                // For example, you could redirect to a different page
-                //$_SESSION['current_question_index'] = 0;
-                // $_SESSION['user_answers_save'] = $_SESSION['user_answers'];
-                //echo "stop";
-                // header("Location: result.php");
-                //exit;
-                //}
-
-                // $current_question = $questions[$_SESSION['current_question_index']];
-               // $answers  = Tests::answers($_SESSION['current_question_index'] + 1);
+              
 
 
 

@@ -1,29 +1,23 @@
- <?php
+<?php
     require_once '../models/tests.php';
     session_start();
     if (isset($_SESSION['admin'])) {
 
         $tests = tests::testsShow();
-
-
-        var_dump($_request);
-       
+ 
         if (isset($_POST['delete']) && $_POST['test_id']) {
-            $testId = $_POST['test_id'];
-            var_dump($testId);
-            echo "delete";
-            exit;
-           // $testsDelete = tests::testsDelete($testId);
+            
+            $testsDelete = tests::testsDelete($_POST['test_id']);
             // $testsEdit = tests::testsEdit($testId);
             header('Location: controller-dashboard.php');
 
         }
         else 
         if (isset($_POST['save']) && $_POST['test_id']){
-             echo "save";
-             exit;
-
-            
+            $champName="text".$_POST['test_id'] ;
+            $text = $_POST[$champName];            
+            $testsEdit = tests::testsEdit($_POST['test_id'],$text);
+            header('Location: controller-dashboard.php');
         } 
         }
     else {

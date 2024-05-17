@@ -13,6 +13,7 @@
     <!-- Header -->
     <?php include '../../assets/header.php'; ?>
     <br><br>
+    
     <div class="container">
         <div class="row">
             <div class="col s12">
@@ -38,16 +39,35 @@
                     </div>
                     <div class="row">
                         <div class="col s12 center-align">
-                            <button class="btn waves-effect waves-light" id="button" name="next" type="submit">Next</button>
+                        <button class="btn waves-effect waves-light" id="submitBtn" name="next" type="submit" disabled>Next</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <!--Import jQuery before Materialize.js-->
+    <script>
+  // Get all the radio buttons
+  const radioButtons = document.querySelectorAll('input[type="radio"]');
+  const submitButton = document.getElementById('submitBtn');
+
+  // Disable the submit button initially
+  submitButton.disabled = true;
+
+  // Add event listener to each radio button
+  radioButtons.forEach(radio => {
+    radio.addEventListener('change', enableSubmitButton);
+  });
+
+  function enableSubmitButton() {
+    // Check if any radio button is checked
+    const isAnyRadioChecked = Array.from(radioButtons).some(radio => radio.checked);
+
+    // Enable the submit button if any radio button is checked
+    submitButton.disabled = !isAnyRadioChecked;
+  }
+</script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src ="../assets/js/test.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>

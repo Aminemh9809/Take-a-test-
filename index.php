@@ -61,7 +61,7 @@
         <div class="container">
             <h1>Unleash Your Potential</h1>
             <p class="lead">Explore a wide range of tests covering various topics and improve your skills.</p>
-            <a href="users/controllers/controller-signup.php" class="btn btn-primary btn-lg">Get Started</a>
+            <a href="users/controllers/controller-signin.php" class="btn btn-primary btn-lg">Get Started</a>
         </div>
     </section>
 
