@@ -1,5 +1,6 @@
 <?php 
-if($_SESSION['user']){
+session_start();
+if(isset($_SESSION['user'])){
 
 
 

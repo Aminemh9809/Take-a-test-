@@ -9,65 +9,65 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom CSS -->
     <style>
-    .sidebar {
-        height: 100vh;
-        background-color: #343a40;
-        color: #fff;
-    }
+        .sidebar {
+            height: 100vh;
+            background-color: #343a40;
+            color: #fff;
+        }
 
-    .sidebar-nav {
-        list-style-type: none;
-        padding-left: 0;
-    }
+        .sidebar-nav {
+            list-style-type: none;
+            padding-left: 0;
+        }
 
-    .sidebar-nav li {
-        margin-bottom: 10px;
-    }
+        .sidebar-nav li {
+            margin-bottom: 10px;
+        }
 
-    .sidebar-nav a {
-        color: #fff;
-        text-decoration: none;
-    }
+        .sidebar-nav a {
+            color: #fff;
+            text-decoration: none;
+        }
 
-    .sidebar-nav a:hover {
-        color: #ccc;
-    }
+        .sidebar-nav a:hover {
+            color: #ccc;
+        }
     </style>
     <script>
-    function editTest(id) {
-        // alert('edit'+id);
-        document.getElementById("span" + id).classList.add('d-none');
-        document.getElementById("text" + id).classList.remove('d-none');
-        document.getElementById("edit" + id).classList.add('d-none');
-        document.getElementById("save" + id).classList.remove('d-none');
-    }
-
-    function saveTest(id) {
-        document.getElementById("span" + id).classList.remove('d-none');
-        document.getElementById("text" + id).classList.add('d-none');
-        document.getElementById("edit" + id).classList.remove('d-none');
-        document.getElementById("save" + id).classList.add('d-none');
-        //document.getElementById("span" + id).innerHTML = document.getElementById("text" + id).value;
-        document.getElementById("test_id").value = id.toString();
-        //alert(document.getElementById("test_id").value);
-        //alert(document.getElementById("action").value);
-
-        //document.getElementById("form1").submit();
-
-
-    }
-
-    function deleteTest(id) {
-        //alert('delete' + id);
-        var result = confirm("Are you sure you want to delete this test");
-        if (result) {
-            document.getElementById("test_id").value = id.toString();
-
-            // document.forms["form1"].submit();
+        function editTest(id) {
+            // alert('edit'+id);
+            document.getElementById("span" + id).classList.add('d-none');
+            document.getElementById("text" + id).classList.remove('d-none');
+            document.getElementById("edit" + id).classList.add('d-none');
+            document.getElementById("save" + id).classList.remove('d-none');
         }
-        //Are you sure you want to delete this test
-        //action="../controllers/controller-dashboard.php"
-    }
+
+        function saveTest(id) {
+            document.getElementById("span" + id).classList.remove('d-none');
+            document.getElementById("text" + id).classList.add('d-none');
+            document.getElementById("edit" + id).classList.remove('d-none');
+            document.getElementById("save" + id).classList.add('d-none');
+            //document.getElementById("span" + id).innerHTML = document.getElementById("text" + id).value;
+            document.getElementById("test_id").value = id.toString();
+            //alert(document.getElementById("test_id").value);
+            //alert(document.getElementById("action").value);
+
+            //document.getElementById("form1").submit();
+
+
+        }
+
+        function deleteTest(id) {
+            //alert('delete' + id);
+            var result = confirm("Are you sure you want to delete this test");
+            if (result) {
+                document.getElementById("test_id").value = id.toString();
+
+                // document.forms["form1"].submit();
+            }
+            //Are you sure you want to delete this test
+            //action="../controllers/controller-dashboard.php"
+        }
     </script>
 </head>
 
@@ -99,36 +99,27 @@
                             <form method="POST" name="form1" id="form1">
 
                                 <?php foreach ($tests as $test) : ?>
-                                <tr>
-                                    <td>
-                                        <span class="test-name"
-                                            id="span<?= $test['id_tests'] ?>"><?= $test['name'] ?></span>
-                                        <input type="text" id="text<?= $test['id_tests'] ?>"
-                                            name="text<?= $test['id_tests'] ?>"
-                                            class="form-control edit-test-name d-none" value="<?= $test['name'] ?>">
+                                    <tr>
+                                        <td>
+                                            <span class="test-name" id="span<?= $test['id_tests'] ?>"><?= $test['name'] ?></span>
+                                            <input type="text" id="text<?= $test['id_tests'] ?>" name="text<?= $test['id_tests'] ?>" class="form-control edit-test-name d-none" value="<?= $test['name'] ?>">
 
 
-                                    </td>
-                                    <td>
-                                        <button type="button" id="edit<?= $test['id_tests'] ?>"
-                                            class="btn btn-primary btn-sm edit-btn"
-                                            onclick="editTest(<?= $test['id_tests'] ?>)">Edit</button>
-                                        <input type="submit" name="save" id="save<?= $test['id_tests'] ?>"
-                                            class="btn btn-primary btn-sm edit-btn d-none"
-                                            onclick="saveTest(<?= $test['id_tests'] ?>)" value="Save">
+                                        </td>
+                                        <td>
+                                            <button type="button" id="edit<?= $test['id_tests'] ?>" class="btn btn-primary btn-sm edit-btn" onclick="editTest(<?= $test['id_tests'] ?>)">Edit</button>
+                                            <input type="submit" name="save" id="save<?= $test['id_tests'] ?>" class="btn btn-primary btn-sm edit-btn d-none" onclick="saveTest(<?= $test['id_tests'] ?>)" value="Save">
 
-                                        <input type="submit" name="delete" class="btn btn-danger btn-sm" value="Delete"
-                                            onclick="deleteTest(<?= $test['id_tests'] ?>)">
+                                            <input type="submit" name="delete" class="btn btn-danger btn-sm" value="Delete" onclick="deleteTest(<?= $test['id_tests'] ?>)">
 
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
                                 <?php endforeach; ?>
                                 <input type="hidden" name="test_id" id="test_id">
 
                             </form>
                             <!-- Delete Modal -->
-                            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
-                                aria-labelledby="deleteModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -141,8 +132,7 @@
                                             Are you sure you want to delete this test?
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                             <!-- The "Confirm Delete" button is now removed -->
                                         </div>
                                     </div>
@@ -196,8 +186,7 @@
     </div>
 
     <!-- Add Test Modal -->
-    <div class="modal fade" id="addTestModal" tabindex="-1" role="dialog" aria-labelledby="addTestModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="addTestModal" tabindex="-1" role="dialog" aria-labelledby="addTestModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -206,25 +195,28 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form method="POST" action="../controllers/controller-dashboard.php">
+                <form method="POST" action="../controllers/controller-dashboard.php">
+                    <div class="modal-body">
                         <div class="form-group">
                             <label for="testName">Test Name</label>
-                            <input type="text" class="form-control" id="testName" placeholder="Enter test name">
+                            <input type="text" class="form-control" id="testName" name="testName" placeholder="Enter test name">
                         </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Add Test</button>
-                </div>
+                        <div class="form-group">
+                            <label for="testDescription">Test Name</label>
+                            <textarea class="form-control" id="testDescription" name="testDescription" rows="3" placeholder="Enter Description text"></textarea>
+                        </div>
+                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add Test</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 
     <!-- Add Question Modal -->
-    <div class="modal fade" id="addQuestionModal" tabindex="-1" role="dialog" aria-labelledby="addQuestionModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="addQuestionModal" tabindex="-1" role="dialog" aria-labelledby="addQuestionModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -246,8 +238,7 @@
                         </div>
                         <div class="form-group">
                             <label for="questionText">Question</label>
-                            <textarea class="form-control" id="questionText" rows="3"
-                                placeholder="Enter question text"></textarea>
+                            <textarea class="form-control" id="questionText" rows="3" placeholder="Enter question text"></textarea>
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -260,41 +251,52 @@
     </div>
 
     <script>
-    $(document).ready(function() {
-        // Edit button click event
-        $('.edit-btn').click(function() {
-            $(this).closest('tr').find('.test-name').addClass('d-none');
-            $(this).closest('tr').find('.edit-test-name').removeClass('d-none');
-            $(this).text('Save');
-            $(this).removeClass('btn-primary').addClass('btn-success');
-        });
+        $(document).ready(function() {
+            // Edit button click event
+            $('.edit-btn').click(function() {
+                $(this).closest('tr').find('.test-name').addClass('d-none');
+                $(this).closest('tr').find('.edit-test-name').removeClass('d-none');
+                $(this).text('Save');
+                $(this).removeClass('btn-primary').addClass('btn-success');
+            });
 
-        // Save button click event
-        $('.btn-success').click(function() {
-            var newTestName = $(this).closest('tr').find('.edit-test-name').val();
-            $(this).closest('tr').find('.test-name').text(newTestName);
-            $(this).closest('tr').find('.test-name').removeClass('d-none');
-            $(this).closest('tr').find('.edit-test-name').addClass('d-none');
-            $(this).text('Edit');
-            $(this).removeClass('btn-success').addClass('btn-primary');
-        });
+            // Save button click event
+            $('.btn-success').click(function() {
+                var newTestName = $(this).closest('tr').find('.edit-test-name').val();
+                $(this).closest('tr').find('.test-name').text(newTestName);
+                $(this).closest('tr').find('.test-name').removeClass('d-none');
+                $(this).closest('tr').find('.edit-test-name').addClass('d-none');
+                $(this).text('Edit');
+                $(this).removeClass('btn-success').addClass('btn-primary');
+            });
 
-        // Delete button click event
-        $('#deleteModal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget);
-            var testId = button.data('test-id');
-            var modal = $(this);
-            modal.find('.confirm-delete').data('test-id', testId);
-        });
+            // Delete button click event
+            $('#deleteModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var testId = button.data('test-id');
+                var modal = $(this);
+                modal.find('.confirm-delete').data('test-id', testId);
+            });
 
-        // Confirm delete button click event
-        $('.confirm-delete').click(function() {
-            var testId = $(this).data('test-id');
-            // Perform the delete operation using AJAX or redirect to a PHP file
-            console.log('Test with ID ' + testId + ' will be deleted.');
-            $('#deleteModal').modal('hide');
+            // Confirm delete button click event
+            $('.confirm-delete').click(function() {
+                var testId = $(this).data('test-id');
+                // Perform the delete operation using AJAX or redirect to a PHP file
+                console.log('Test with ID ' + testId + ' will be deleted.');
+                $('#deleteModal').modal('hide');
+            });
         });
-    });
+    </script>
+    <script>
+        $(document).ready(function() {
+            // Edit button click event
+            $('.edit-btn').click(function() {
+                $(this).closest('tr').find('.test-name').addClass('d-none');
+                $(this).closest('tr').find('.edit-test-name').removeClass('d-none');
+                $(this).text('Save');
+                $(this).removeClass('btn-primary').addClass('btn-success');
+            });
+        })
     </script>
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

@@ -4,7 +4,7 @@ require_once '../config/config.php';
 class Tests
 {
 
-    public static function questions(string $test_id)
+    public static function questions()
     {
 
         try {
@@ -17,14 +17,12 @@ class Tests
 
             // Requête SQL d'insertion des données dans la table userprofil
             $sql = "SELECT *
-            FROM questions
-            WHERE id_tests = :test_id;";
+            FROM questions";
 
             // Préparation de la requête
             $query = $db->prepare($sql);
 
             // Liaison des valeurs avec les paramètres de la requête
-            $query->bindValue(':test_id', $test_id, PDO::PARAM_STR);
             $query->execute();
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
             return $result;
@@ -182,6 +180,36 @@ class Tests
               // Liaison des valeurs avec les paramètres de la requête
               $query->bindValue(':name', htmlspecialchars($name), PDO::PARAM_STR);
               $query->bindValue(':id_tests', $test_id, PDO::PARAM_STR);
+               
+              
+              // Exécution de la requête
+              $query->execute();
+            
+            // Exécution de la requête
+        } catch (PDOException $e) {
+            // En cas d'erreur, affichage du message d'erreur et arrêt du script
+            echo "Erreur update: " . $e->getMessage();
+            die();
+        }
+    }
+    public static function testsAdd(string $name,string $description)
+    { 
+        try {
+            // Les informations de connexion à la base de données
+
+            // Création de l'objet PDO pour la connexion à la base de données
+            $db = new PDO("mysql:host=localhost;dbname=" . DB_NAME, DB_USER, DB_PASS);
+            // Paramétrage des erreurs PDO pour les afficher en cas de problème
+           
+            // Requête SQL d'insertion des données dans la table userprofil
+            $sql = "INSERT INTO `tests` (`name`,`description`) VALUES (:name, :description);";
+
+            // Préparation de la requête
+            $query = $db->prepare($sql);
+  
+              // Liaison des valeurs avec les paramètres de la requête
+              $query->bindValue(':name', htmlspecialchars($name), PDO::PARAM_STR);
+              $query->bindValue(':description', htmlspecialchars($description), PDO::PARAM_STR);
                
               
               // Exécution de la requête
