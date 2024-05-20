@@ -7,7 +7,7 @@
         // Show all tests
         $tests = tests::testsShow();
         $questions = tests::questions();
-
+        // var_dump($questions);
         // Delete Test 
         if (isset($_POST['delete']) && $_POST['test_id']) {
             

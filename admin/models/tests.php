@@ -4,8 +4,7 @@ require_once '../config/config.php';
 class Tests
 {
 
-    public static function questions()
-    {
+    public static function questions(){
 
         try {
             // Les informations de connexion à la base de données
@@ -17,7 +16,7 @@ class Tests
 
             // Requête SQL d'insertion des données dans la table userprofil
             $sql = "SELECT *
-            FROM questions";
+            FROM questions order by questions . id_tests asc";
 
             // Préparation de la requête
             $query = $db->prepare($sql);
@@ -34,6 +33,7 @@ class Tests
             die();
         }
     }
+    
     public static function answers(string $question_id)
     {
 
@@ -172,7 +172,7 @@ class Tests
             // Paramétrage des erreurs PDO pour les afficher en cas de problème
            
             // Requête SQL d'insertion des données dans la table userprofil
-            $sql = "update   tests set name= :name where id_tests = :id_tests";
+            $sql = "UPDATE   tests set name= :name where id_tests = :id_tests";
 
             // Préparation de la requête
             $query = $db->prepare($sql);

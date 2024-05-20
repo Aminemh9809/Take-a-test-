@@ -53,9 +53,8 @@
             //alert(document.getElementById("action").value);
 
             //document.getElementById("form1").submit();
-
-
         }
+
 
         function deleteTest(id) {
             //alert('delete' + id);
@@ -160,6 +159,8 @@
                     <h2>Questions</h2>
                     <button class="btn btn-primary" data-toggle="modal" data-target="#addQuestionModal">Add
                         Question</button>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#addQuestionModal">Add
+                        Answers</button>
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -168,17 +169,31 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>What is the capital of France?</td>
-                                <td>Test 1</td>
-                                <td>
-                                    <button class="btn btn-primary btn-sm">Edit</button>
-                                    <button class="btn btn-danger btn-sm">Delete</button>
-                                </td>
-                            </tr>
-                            <!-- Add more question rows here -->
-                        </tbody>
+
+
+
+                            <!-- Questions -->
+                        <form action="../controllers/controller-dashboard.php" method="POST">
+                            <tbody>
+                                <?php foreach ($questions as $question) : ?>
+                                    <tr>
+                                        <td>
+                                            <span class="question-text"><?= $question['question'] ?></span>
+                                            <input type="text" id="editQuestion<?= $question['question'] ?>" class="form-control edit-question d-none" value="<?= $question['question'] ?>">
+                                        </td>
+                                        <td>Test <?= $question['id_tests'] ?></td>
+                                        <td>
+                                        <button type="button" id="editButton" class="btn btn-primary btn-sm">Edit</button>
+                                            <!-- Button display none to save the edit -->
+                                            <button type="submit" class="btn btn-success btn-sm d-none save-btn">Save</button>
+
+                                            <button class="btn btn-danger btn-sm">Delete</button>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+
+                            </tbody>
+                        </form>
                     </table>
                 </div>
             </div>
@@ -202,10 +217,10 @@
                             <input type="text" class="form-control" id="testName" name="testName" placeholder="Enter test name">
                         </div>
                         <div class="form-group">
-                            <label for="testDescription">Test Name</label>
-                            <textarea class="form-control" id="testDescription" name="testDescription" rows="3" placeholder="Enter Description text"></textarea>
+                            <label for="testDescription">Test Description</label>
+                            <textarea class="form-control" id="testDescription" name="testDescription" rows="3" placeholder="Enter Description text..."></textarea>
                         </div>
-                        </div>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-primary">Add Test</button>
@@ -287,17 +302,40 @@
             });
         });
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
     <script>
-        $(document).ready(function() {
-            // Edit button click event
-            $('.edit-btn').click(function() {
-                $(this).closest('tr').find('.test-name').addClass('d-none');
-                $(this).closest('tr').find('.edit-test-name').removeClass('d-none');
-                $(this).text('Save');
-                $(this).removeClass('btn-primary').addClass('btn-success');
-            });
-        })
-    </script>
+    let buttons = document.querySelectorAll("#editButton");
+let form = document.querySelector("form"); // Select the form element
+
+buttons.forEach(function(button) {
+  button.addEventListener("click", function() {
+    let questionText = button.parentNode.parentNode.querySelector(".question-text");
+    let editInput = button.parentNode.parentNode.querySelector(".edit-question");
+    let saveButton = button.parentNode.querySelector(".save-btn");
+
+    button.classList.add("d-none");
+    questionText.classList.add("d-none");
+    editInput.classList.remove("d-none");
+    saveButton.classList.remove("d-none");
+
+    saveButton.addEventListener("click", function() {
+      // Update the value of the question text span
+      questionText.textContent = editInput.value;
+
+      // Hide the input and save button, show the question text and edit button
+      editInput.classList.add("d-none");
+      saveButton.classList.add("d-none");
+      questionText.classList.remove("d-none");
+      button.classList.remove("d-none");
+
+      // Submit the form
+      form.submit();
+    });
+  });
+});
+
+</script>
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

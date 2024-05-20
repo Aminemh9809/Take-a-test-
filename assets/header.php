@@ -12,26 +12,71 @@
     <title>Test Website</title>
     <style>
         nav .brand-logo {
-            display: flex;
-            align-items: center;
-        }
+  display: flex;
+  align-items: center;
+  height: 64px;
+  transition: color 0.3s ease; /* Add transition for smooth color change */
+}
 
-        nav .brand-logo img {
-            height: 50px;
-            margin-right: 10px;
-            max-width: 100%;
-        }
+nav .brand-logo:hover {
+  color: #e0e0e0; /* Change color on hover */
+}
 
-        nav .brand-logo:hover {
-            text-decoration: none;
-        }
+nav .brand-logo img {
+  height: 50px;
+  margin-right: 10px;
+  max-width: 100%;
+  transition: transform 0.3s ease; /* Add transition for smooth scaling */
+}
+
+nav .brand-logo:hover img {
+  transform: scale(1.1); /* Scale up the image on hover */
+}
+
+nav .brand-logo span {
+  white-space: nowrap;
+}
+
+nav ul a {
+  transition: color 0.3s ease; /* Add transition for smooth color change */
+}
+
+nav ul a:hover {
+  color: #e0e0e0; /* Change color on hover */
+  background-color: rgba(255, 255, 255, 0.1); /* Add a subtle background color */
+}
+
+@media (max-width: 600px) {
+  
+
+  nav .brand-logo {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: auto;
+  }
+
+  nav .brand-logo img {
+    height: 25px; /* Adjust the height as desired */
+    margin-right: 5px;
+  }
+
+  nav .brand-logo span {
+    white-space: normal;
+  }
+
+  .sidenav-trigger {
+    margin-left: auto;
+  }
+}
 
         @media (max-width: 600px) {
             nav .brand-logo {
-                font-size: 1.2rem;
+                font-size: 1rem;
             }
             nav .brand-logo img {
-                height: 35px; /* Adjust the height as desired */
+                height: 25px; /* Adjust the height as desired */
             }
         }
     </style>
